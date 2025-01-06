@@ -1,0 +1,578 @@
+/*STYLES FROM LUMOS*/
+
+:root {
+    /* grid */
+    --column-count: 12;
+    --grid-main: repeat(var(--column-count), minmax(0, 1fr));
+    --grid-1: repeat(1, minmax(0, 1fr));
+    --grid-2: repeat(2, minmax(0, 1fr));
+    --grid-3: repeat(3, minmax(0, 1fr));
+    --grid-4: repeat(4, minmax(0, 1fr));
+    --grid-5: repeat(5, minmax(0, 1fr));
+    --grid-6: repeat(6, minmax(0, 1fr));
+    --grid-7: repeat(7, minmax(0, 1fr));
+    --grid-8: repeat(8, minmax(0, 1fr));
+    --grid-9: repeat(9, minmax(0, 1fr));
+    --grid-10: repeat(10, minmax(0, 1fr));
+    --grid-11: repeat(11, minmax(0, 1fr));
+    --grid-12: repeat(12, minmax(0, 1fr));
+    --grid-gap-total: calc(var(--grid-gap--main) * (var(--column-count) - 1));
+    --column-width: calc((100% - var(--grid-gap-total)) / var(--column-count) + var(--grid-gap--main));
+    --breakout-gutter: minmax(calc(var(--padding-horizontal--main) - var(--grid-gap--main)), 1fr);
+    --breakout-remaining: calc(var(--max-width--main) - (var(--padding-horizontal--main) * 2));
+    --breakout-start: [full-start] var(--breakout-gutter) [content-start];
+    --breakout-end: [content-end] var(--breakout-gutter) [full-end];
+    --grid-breakout-single: var(--breakout-start) minmax(0, var(--breakout-remaining)) var(--breakout-end);
+    --grid-breakout: var(--breakout-start) repeat(var(--column-count), minmax(0, calc((var(--breakout-remaining) - var(--grid-gap-total)) / var(--column-count)))) var(--breakout-end);
+    /* others */
+    --font-weight--inherit: inherit;
+    --font-weight--100: 100;
+    --font-weight--200: 200;
+    --font-weight--300: 300;
+    --font-weight--400: 400;
+    --font-weight--500: 500;
+    --font-weight--600: 600;
+    --font-weight--700: 700;
+    --font-weight--800: 800;
+    --font-weight--900: 900;
+    --text-transform--none: none;
+    --text-transform--uppercase: uppercase;
+    --text-transform--capitalize: capitalize;
+    --text-transform--lowercase: lowercase;
+    --text-transform--inherit: inherit;
+    --max-width--none: none;
+}
+
+body {
+    text-transform: var(--text-main--text-transform);
+    font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
+}
+
+/*
+h1, h2, h3, h4, h5, h6, blockquote {
+font-size: inherit;
+line-height: inherit;
+font-weight: inherit;
+}
+*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+label,
+blockquote {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+button {
+    background-color: unset;
+    padding: unset;
+    text-align: inherit;
+    cursor: pointer;
+}
+
+img::selection {
+    background: transparent;
+}
+
+:is(h1, h2, h3, h4, h5, h6, p) a {
+    text-decoration: underline;
+}
+
+.u-rich-text>*:first-child {
+    margin-top: 0;
+}
+
+.u-rich-text>*:last-child {
+    margin-bottom: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+:is(h1, h2, h3, h4, h5, h6, p) a {
+    text-decoration: underline;
+}
+
+video {
+    width: 100%;
+    object-fit: cover;
+}
+
+svg {
+    display: block;
+}
+
+section,
+header,
+footer {
+    position: relative;
+}
+
+
+/*STYLES FROM CLIENT FIRST*/
+
+/* Make text look crisper and more legible in all browsers */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+/* Focus state style for keyboard navigation for the focusable elements */
+*[tabindex]:focus-visible,
+input[type="file"]:focus-visible {
+    outline: 0.125rem solid #4d65ff;
+    outline-offset: 0.125rem;
+}
+
+/* Set color style to inherit */
+.inherit-color * {
+    color: inherit;
+}
+
+/* Get rid of top margin on first element in any rich text element */
+.w-richtext> :not(div):first-child,
+.w-richtext>div:first-child> :first-child {
+    margin-top: 0 !important;
+}
+
+/* Get rid of bottom margin on last element in any rich text element */
+.w-richtext>:last-child,
+.w-richtext ol li:last-child,
+.w-richtext ul li:last-child {
+    margin-bottom: 0 !important;
+}
+
+
+/* Make sure containers never lose their center alignment */
+.container-medium,
+.container-small,
+.container-large {
+    margin-right: auto !important;
+    margin-left: auto !important;
+    position: relative;
+}
+
+/* 
+Make the following elements inherit typography styles from the parent and not have hardcoded values. 
+Important: You will not be able to style for example "All Links" in Designer with this CSS applied.
+Uncomment this CSS to use it in the project. Leave this message for future hand-off.
+*/
+/*
+a,
+.w-input,
+.w-select,
+.w-tab-link,
+.w-nav-link,
+.w-dropdown-btn,
+.w-dropdown-toggle,
+.w-dropdown-link {
+color: inherit;
+text-decoration: inherit;
+font-size: inherit;
+}
+*/
+
+/* Apply "..." after 3 lines of text */
+.text-style-3lines {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+/* Apply "..." after 2 lines of text */
+.text-style-2lines {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+/* These classes are never overwritten */
+.hide {
+    display: none !important;
+}
+
+@media screen and (max-width: 991px) {
+
+    .hide,
+    .hide-tablet {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .hide-mobile-landscape {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 479px) {
+    .hide-mobile {
+        display: none !important;
+    }
+}
+
+.margin-0 {
+    margin: 0rem !important;
+}
+
+.padding-0 {
+    padding: 0rem !important;
+}
+
+.spacing-clean {
+    padding: 0rem !important;
+    margin: 0rem !important;
+}
+
+.margin-top {
+    margin-right: 0rem !important;
+    margin-bottom: 0rem !important;
+    margin-left: 0rem !important;
+}
+
+.padding-top {
+    padding-right: 0rem !important;
+    padding-bottom: 0rem !important;
+    padding-left: 0rem !important;
+}
+
+.margin-right {
+    margin-top: 0rem !important;
+    margin-bottom: 0rem !important;
+    margin-left: 0rem !important;
+}
+
+.padding-right {
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+    padding-left: 0rem !important;
+}
+
+.margin-bottom {
+    margin-top: 0rem !important;
+    margin-right: 0rem !important;
+    margin-left: 0rem !important;
+}
+
+.padding-bottom {
+    padding-top: 0rem !important;
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
+}
+
+.margin-left {
+    margin-top: 0rem !important;
+    margin-right: 0rem !important;
+    margin-bottom: 0rem !important;
+}
+
+.padding-left {
+    padding-top: 0rem !important;
+    padding-right: 0rem !important;
+    padding-bottom: 0rem !important;
+}
+
+.margin-horizontal {
+    margin-top: 0rem !important;
+    margin-bottom: 0rem !important;
+}
+
+.padding-horizontal {
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+}
+
+.margin-vertical {
+    margin-right: 0rem !important;
+    margin-left: 0rem !important;
+}
+
+.padding-vertical {
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
+}
+
+[class*="-custom-code"],
+[class*="-custom_code"] {
+    display: none;
+}
+
+.wf-design-mode #all-categories {
+    max-width: 11.25cqw;
+}
+
+.wf-design-mode .starogard-item {
+    max-width: 15rem;
+}
+
+.wf-design-mode .starogard-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+/* for images in rich text*/
+@media screen and (max-width: 767px) {
+    .w-richtext figure {
+        max-width: 100% !important;
+    }
+
+    .w-richtext figure.w-richtext-align-floatright {
+        margin-left: 0;
+    }
+}
+
+.products-list.grid-autofit {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+}
+
+
+/* theme light */
+:root,
+[data-theme="light"],
+[data-theme="dark"] [data-theme="invert"] {
+    --theme--background-primary: var(--color--neutral-1);
+    --theme--background-secondary: var(--color--transparent);
+    --theme--background-tertiary: var(--color--white);
+    --theme--text-primary: var(--color--brand-3);
+    --theme--text-secondary: var(--color--neutral-5);
+    --theme--text-tertiary: var(--color--brand-2);
+    --theme--border-primary: var(--color--neutral-2);
+    --theme--border-secondary: var(--color--brand-2);
+    /* button primary */
+    --button--background: var(--color--brand-1);
+    --button--text: var(--color--white);
+    --button--border: var(--color--brand-1);
+    --button--background-hover: var(--color--brand-4);
+    --button--text-hover: var(--color--white);
+    --button--border-hover: var(--color--brand-4);
+}
+
+/* button secondary for light*/
+[data-button-style="secondary"],
+[data-theme="light"] [data-button-style="secondary"],
+[data-theme="dark"] [data-theme="invert"] [data-button-style="secondary"] {
+    --button--background: var(--color--transparent);
+    --button--text: var(--color--brand-1);
+    --button--border: var(--color--brand-1);
+    --button--background-hover: var(--color--brand-5);
+    --button--text-hover: var(--color--brand-1);
+    --button--border-hover: var(--color--brand-1);
+}
+
+/* button text for light */
+[data-button-style="text"],
+[data-theme="light"] [data-button-style="text"],
+[data-theme="dark"] [data-theme="invert"] [data-button-style="text"] {
+    --button--background: var(--color--transparent);
+    --button--text: var(--color--brand-1);
+    --button--border: var(--color--transparent);
+    --button--background-hover: var(--color--transparent);
+    --button--text-hover: var(--color--brand-4);
+    --button--border-hover: var(--color--transparent);
+}
+
+
+
+/* theme dark */
+[data-theme="dark"],
+[data-theme="invert"],
+[data-theme="light"] [data-theme="invert"] {
+    --theme--background-primary: var(--color--transparent);
+    --theme--background-secondary: var(--color--black);
+    --theme--background-tertiary: var(--color--brand-2);
+    --theme--text-primary: var(--color--white);
+    --theme--text-secondary: var(--color--neutral-3);
+    --theme--text-tertiary: var(--color--brand-2);
+    --theme--border-primary: var(--color--neutral-4);
+    --theme--border-secondary: var(--color--brand-2);
+
+    /* button primary */
+    --button--background: var(--color--white);
+    --button--text: var(--color--neutral-6);
+    --button--border: var(--color--white);
+    --button--background-hover: var(--color--brand-5);
+    --button--text-hover: var(--color--neutral-3);
+    --button--border-hover: var(--color--brand-5);
+
+}
+
+/* button secondary for dark*/
+[data-theme="dark"] [data-button-style="secondary"],
+[data-theme="light"] [data-theme="invert"] [data-button-style="secondary"] {
+    --button--background: var(--color--transparent);
+    --button--text: var(--color--white);
+    --button--border: var(--color--white);
+    --button--background-hover: var(--color--brand-5);
+    --button--text-hover: var(--color--brand-3);
+    --button--border-hover: var(--color--brand-5);
+}
+
+/* button text for dark */
+[data-theme="dark"] [data-button-style="text"],
+[data-theme="light"] [data-theme="invert"] [data-button-style="text"] {
+    --button--background: var(--color--transparent);
+    --button--text: var(--color--neutral-6);
+    --button--border: var(--color--transparent);
+    --button--background-hover: var(--color--transparent);
+    --button--text-hover: var(--color--brand-5);
+    --button--border-hover: var(--color--transparent);
+}
+
+/* apply colors */
+:is(c, :where([data-theme]:not([data-theme="inherit"]))) {
+    background-color: var(--theme--background-primary);
+    color: var(--theme--text-primary);
+}
+
+/* desktop */
+:root {
+    /* custom */
+}
+
+/* tablet */
+@media screen and (max-width: 991px) {
+    :root {
+        /* custom */
+        --padding-horizontal--main: 2rem;
+        /* adaptive sizes */
+        /* COMMENT IT OUT IF ADDAPTIVE SIZE IS NO NEEDED FOR TABLET!! */
+        --size--2rem: 1.75rem;
+        --size--2-5rem: 2.18rem;
+        --size--3rem: 2.52rem;
+        --size--3-5rem: 2.73rem;
+        --size--4rem: 3rem;
+        --size--4-5rem: 3.375rem;
+        --size--5rem: 3.75rem;
+        --size--5-5rem: 4.125rem;
+        --size--6rem: 4.5rem;
+        --size--6-5rem: 4.875rem;
+        --size--7rem: 5.25rem;
+        --size--7-5rem: 5.625rem;
+        --size--8rem: 6rem;
+        --size--8-5rem: 6.375rem;
+        --size--9rem: 6.75rem;
+        --size--9-5rem: 7.125rem;
+        --size--10rem: 7.5rem;
+        --size--11rem: 8.25rem;
+        --size--12rem: 9rem;
+        --size--13rem: 9.75rem;
+        --size--14rem: 10.5rem;
+        --size--15rem: 11.25rem;
+        --size--16rem: 12rem;
+    }
+}
+
+/* landscape */
+@media screen and (max-width: 767px) {
+    :root {
+        /* custom */
+        --padding-horizontal--main: 1rem;
+        /* adaptive sizes */
+        /* COMMENT IT OUT IF ADDAPTIVE SIZE IS NO NEEDED FOR MOBILE!! */
+        --size--2-5rem: 2rem;
+        --size--3rem: 2.25rem;
+        --size--3-5rem: 2.375rem;
+        --size--4rem: 2.5rem;
+        --size--4-5rem: 2.75rem;
+        --size--5rem: 3rem;
+        --size--5-5rem: 3.25rem;
+        --size--6rem: 3.5rem;
+        --size--6-5rem: 3.75rem;
+        --size--7rem: 4rem;
+        --size--7-5rem: 4.25rem;
+        --size--8rem: 4.5rem;
+        --size--8-5rem: 4.75rem;
+        --size--9rem: 5rem;
+        --size--9-5rem: 5.25rem;
+        --size--10rem: 5.5rem;
+        --size--11rem: 5.75rem;
+        --size--12rem: 6rem;
+        --size--13rem: 6.5rem;
+        --size--14rem: 7rem;
+        --size--15rem: 7.5rem;
+        --size--16rem: 8rem;
+    }
+}
+
+/* portrait */
+@media screen and (max-width: 479px) {
+    :root {
+        /* custom */
+    }
+}
+
+body {
+    overscroll-behavior-y: none;
+}
+
+.page-wrapper {
+    overflow: clip !important;
+}
+
+.navbar {
+    background-color: inherit;
+    padding: inherit;
+    margin: inherit;
+    position: inherit;
+    color: inherit;
+}
+
+[data-button-size="small"] {
+    padding: calc(0.75 * var(--button-size--padding-vertical)) calc(0.5 * var(--button-size--padding-horizontal));
+}
+
+[data-button-size="large"] {
+    padding: calc(1.25 * var(--button-size--padding-vertical)) calc(1.125 * var(--button-size--padding-horizontal));
+}
+
+[data-button-style="text"] {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.button:not(:has(.button-text)) {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+[data-button-order="reverse"].button.is-icon {
+    flex-direction: row-reverse;
+}
+
+.text-rich-clear>*:not(h1, h2, h3, h4, h5, h6, p, blockquote) {
+    display: none !important;
+}
+
+.text-rich-clear>* {
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    color: inherit;
+    text-align: inherit;
+    margin: 0;
+}
+
+.dropdown-toggle.w--open {
+    color: var(--color--brand-1);
+    background-color: var(--color--brand-5);
+
+}
