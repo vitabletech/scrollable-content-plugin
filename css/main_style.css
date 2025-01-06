@@ -576,3 +576,12 @@ body {
     background-color: var(--color--brand-5);
 
 }
+
+/* home-scroll_section */
+.home-scroll_img-item.is-active {
+    opacity: 1;
+  }
+
+.home-scroll_text-item.is-active {
+opacity: 1;
+}
