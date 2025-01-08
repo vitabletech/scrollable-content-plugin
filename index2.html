@@ -52,7 +52,7 @@
     </div>
   </div>
 </div>
-<iframe title="Navigation menu" src="./index.html"  width="100%"  height="800"  style="border: none;"></iframe>
+<iframe id="myIframe" title="Navigation menu" src="./index.html"  width="100%"  height="800"  style="border: none;"></iframe>
 <div class="container mt-5">
   <div class="row">
     <div class="col-sm-4">
@@ -111,22 +111,32 @@
   </div>
 </div>
 <script>
-  const iframe = document.querySelector('iframe');
+  function handleIframeScroll(iframeId) {
+    const iframe = document.getElementById(iframeId);
 
-  iframe.addEventListener('load', () => {
-    const iframeDocument = iframe.contentWindow.document;
+    iframe.addEventListener('load', () => {
+      const iframeDocument = iframe.contentWindow.document;
 
-    // Listen for scroll inside the iframe
-    iframeDocument.addEventListener('scroll', () => {
-      const scrollPosition = iframeDocument.documentElement.scrollTop + iframeDocument.documentElement.clientHeight;
-      const iframeHeight = iframeDocument.documentElement.scrollHeight;
+      // Listen for scroll inside the iframe
+      iframeDocument.addEventListener('scroll', () => {
+        const scrollPosition = iframeDocument.documentElement.scrollTop + iframeDocument.documentElement.clientHeight;
+        const iframeHeight = iframeDocument.documentElement.scrollHeight;
 
-      // Check if the iframe is at the bottom
-      if (scrollPosition >= iframeHeight) {
-        window.scrollTo(0, document.body.scrollHeight); // Scroll the parent page down
-      }
+        // Check if the iframe is at the bottom
+        if (scrollPosition >= iframeHeight) {
+          window.scrollTo(0, document.body.scrollHeight); // Scroll the parent page down
+        }
+
+        // Check if the iframe is at the top
+        if (iframeDocument.documentElement.scrollTop === 0) {
+          window.scrollTo(0, 0); // Scroll the parent page up
+        }
+      });
     });
-  });
+  }
+
+  // Call the function with the id of the iframe
+  handleIframeScroll('myIframe');
 </script>
 
   </body>
